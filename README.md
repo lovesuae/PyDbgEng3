@@ -1,4 +1,4 @@
-### PyDbgEng3
+# PyDbgEng3
 
 PyDbgEng is a python compact wrapper from PyDbgEng for microsoft debug engine.
 
@@ -30,7 +30,7 @@ and crashInfo['description'] like this:
 	DESCRIPTION:Read Access Violation near NULL
 	SHORT_DESCRIPTION:ReadAVNearNull
 	CLASSIFICATION:PROBABLY_NOT_EXPLOITABLE
-	BUG_TITLE:Read Access Violation near NULL starting at MSHTML!DllCanUnloadNow+0x01 (Hash=0x76da4b51.0x429cabbb)
+	BUG_TITLE:Read Access Violation near NULL starting at MSHTML!DllCanUnloadNow+0x01
 	EXPLANATION:This is a user mode read access violation near null, and is probably not exploitable.
 
 ### Versions
