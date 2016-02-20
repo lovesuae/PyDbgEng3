@@ -14,12 +14,15 @@ PyDbgEng is a python compact wrapper from PyDbgEng for microsoft debug engine.
     * Python >= 3.0
 	* psutil
 	* comtypes
+	* Visual C++ Redistributable 2012
 
 # Install
 
 Download psutil from https://pypi.python.org/pypi/psutil and setup.
 
 Download comtypes from https://github.com/enthought/comtypes and setup.
+
+Download Visual C++ Redistributable 2012 from https://www.microsoft.com/en-us/download/details.aspx?id=30679 and setup.
 
 Download PyDbgEng3 from https://github.com/walkerfuz/PyDbgEng3 adn setup.
 	
@@ -47,6 +50,7 @@ and crashInfo['description'] like this:
 	
 * v0.0.2
 	* fix bugs when comtypes.gen isn't exist.
+	* add Visual C++ Redistributable 2012 setup to install steps.
 * v0.0.1
 	* change pydbgeng for python 3.x.
 
