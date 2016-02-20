@@ -4,15 +4,22 @@
 import os
 import sys
 import re
-import pickle
 from ctypes import *
 import comtypes
-from comtypes.gen import DbgEng
+from comtypes.client import *
+
+# fix to resolve bug when comtypes.gen isn't exist
+try:
+    from comtypes.gen import DbgEng
+except ImportError:
+    tlb_file = os.path.join(os.path.dirname(__file__), "PyDbgEng/Data", "DbgEng.tlb")
+    comtypes.client.GetModule(tlb_file)
+    from comtypes.gen import DbgEng
 import hashlib
 import psutil
 
-from .PyDbgEng.PyDbgEng import IDebugOutputCallbacksSink
-from .PyDbgEng.PyDbgEng import IDebugEventCallbacksSink
+from PyDbgEng3.PyDbgEng.PyDbgEng import IDebugOutputCallbacksSink
+from PyDbgEng3.PyDbgEng.PyDbgEng import IDebugEventCallbacksSink
 
 class DbgEventHandler(IDebugOutputCallbacksSink, IDebugEventCallbacksSink):
 

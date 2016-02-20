@@ -3,9 +3,9 @@
 
 from multiprocessing import *
 
-from .DbgEventHandler import *
+from PyDbgEng3.DbgEventHandler import *
 
-from .PyDbgEng.ProcessCreator import ProcessCreator
+from PyDbgEng3.PyDbgEng.ProcessCreator import ProcessCreator
 
 # you can set log file path to trace parameter
 # or it will be return exception string when tarce is none
