@@ -1,6 +1,6 @@
 # About
 
-PyDbgEng is a python compact wrapper from PyDbgEng for microsoft debug engine.
+PyDbgEng3 is a python compact wrapper from PyDbgEng for microsoft debug engine.
 
 # Features
 
