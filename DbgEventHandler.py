@@ -25,7 +25,7 @@ class DbgEventHandler(IDebugOutputCallbacksSink, IDebugEventCallbacksSink):
 
     buff = ''
     TakeStackTrace = True
-    crashInfo = None
+    CrashInfo = None
 
     def Output(self, this, Mask, Text):
         try:
@@ -82,6 +82,7 @@ class DbgEventHandler(IDebugOutputCallbacksSink, IDebugEventCallbacksSink):
                 else:
                     # Otherwise skip first chance
                     return DbgEng.DEBUG_STATUS_NO_CHANGE
+
             else:
                 # otherwise skip first chance
                 return DbgEng.DEBUG_STATUS_NO_CHANGE
@@ -92,9 +93,8 @@ class DbgEventHandler(IDebugOutputCallbacksSink, IDebugEventCallbacksSink):
             return DbgEng.DEBUG_STATUS_BREAK
 
         try:
-            # print("DbgEventHandler:ExceptionCode=0x%X, ExceptionAddress=0x%X." % (ExceptionCode, ExceptionAddress))
             self.buff = ''
-            self.crashInfo = {}
+            self.CrashInfo = {}
             self.handlingFault.set()
 
             if self.pid == None:
@@ -149,7 +149,10 @@ class DbgEventHandler(IDebugOutputCallbacksSink, IDebugEventCallbacksSink):
                 classification = re.compile("^CLASSIFICATION:(.*)$", re.M).search(self.buff).group(1)
                 shortDescription = re.compile("^SHORT_DESCRIPTION:(.*)$", re.M).search(self.buff).group(1)
                 if majorHash != None and minorHash != None:
-                    bucket = "%s_%s_%s_%s" % (classification, shortDescription, majorHash, minorHash)
+                    if self.MinorHash is False:
+                        bucket = "%s_%s_%s" % (classification, shortDescription, majorHash)
+                    else:
+                        bucket = "%s_%s_%s_%s" % (classification, shortDescription, majorHash, minorHash)
             except:
                 x = (ExceptionCode, ExceptionFlags, ExceptionRecord,
                         ExceptionAddress, NumberParameters, ExceptionInformation0, ExceptionInformation1,
@@ -179,14 +182,18 @@ class DbgEventHandler(IDebugOutputCallbacksSink, IDebugEventCallbacksSink):
         else:
             pass
 
-        self.crashInfo['bucket'] = bucket
-        self.crashInfo['description'] = self.buff
+        self.CrashInfo['bucket'] = bucket
+        self.CrashInfo['description'] = self.buff
 
         self.buff = ""
         self.fault = True
-
         if self.pid != None:
+            parent_id = (psutil.Process(self.pid)).ppid()
+            # 同时结束当前进程的父进程使得Debugger正确结束所有浏览器标签
+            # v0.3.1 bug fix 父进程为python.exe pre_fuzz进程时会被错误终止
             psutil.Process(self.pid).terminate()
+            if self.Mode == "M":
+                psutil.Process(parent_id).terminate()
 
         self.handledFault.set()
         return DbgEng.DEBUG_STATUS_GO
