@@ -34,11 +34,11 @@ Download PyDbgEng3 from https://github.com/walkerfuz/PyDbgEng3 adn setup.
 
 1. If set minorHash is True, you will get crashInfo['bucket']like this:
 
-	PROBABLY_NOT_EXPLOITABLE_ReadAVNearNull_0x76da4b51_0x429cabbb
+> PROBABLY_NOT_EXPLOITABLE_ReadAVNearNull_0x76da4b51_0x429cabbb
 	
-    and if set minorHash is False, you will get crashInfo['bucket']like this:
+and if set minorHash is False, you will get crashInfo['bucket']like this:
 
-	PROBABLY_NOT_EXPLOITABLE_ReadAVNearNull_0x76da4b51
+> PROBABLY_NOT_EXPLOITABLE_ReadAVNearNull_0x76da4b51
 
 
 2. When target process is multiprocess like chrome and IEx64, you should set mode to 'M' which is equal to Multiprocess, and 
@@ -46,7 +46,7 @@ when target process is singleprocess like firefox, you should set mode to 'S' wh
 
 3. You can set trace to one folder to save crash info which name like this:
 
-	PROBABLY_NOT_EXPLOITABLE_ReadAVNearNull_0x76da4b51.crash
+> PROBABLY_NOT_EXPLOITABLE_ReadAVNearNull_0x76da4b51.crash
 
 4. crashInfo['description which is in crash file like this:
 
