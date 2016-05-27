@@ -30,7 +30,7 @@ Download PyDbgEng3 from https://github.com/walkerfuz/PyDbgEng3 adn setup.
 
 	from PyDbgEng3 import Debugger
 	proc_args = b"C:/Program Files/Internet Explorer/iexplore.exe"
-	crashInfo = Debugger.Run(proc_args, minorHash=True, mode=False, trace=None)
+	crashInfo = Debugger.Run(proc_args, minorHash=True, mode="M"/"S", trace=None)
 
 1. If set minorHash is True, you will get crashInfo['bucket']like this:
 
